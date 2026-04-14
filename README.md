@@ -1,5 +1,5 @@
 # Noisy Graph Patterns
-[![arXiv](https://img.shields.io/badge/arXiv-2601.11171-b31b1b.svg)](https://arxiv.org/abs/2601.11171)[![arXiv](https://img.shields.io/badge/arXiv-2602.19745-b31b1b.svg)](https://arxiv.org/abs/2602.19745)[![DOI](https://zenodo.org/badge/1209637100.svg)](https://doi.org/10.5281/zenodo.19571861)
+[![arXiv](https://img.shields.io/badge/arXiv-2601.11171-b31b1b.svg)](https://arxiv.org/abs/2601.11171)[![arXiv](https://img.shields.io/badge/arXiv-2602.19745-b31b1b.svg)](https://arxiv.org/abs/2602.19745)
 
 This repository contains the code and data for extracting and visualizing noisy graph patterns via Moran's _I_ optimized matrix orderings. This covers both the pipeline for extracting noisy patterns and their visualization via Ring Motifs[^1] as well as the extension to unfold ordered matrices into BioFabric Motifs[^2].
 
