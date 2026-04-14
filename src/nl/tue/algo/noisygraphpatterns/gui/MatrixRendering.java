@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package nl.tue.algo.noisygraphpatterns.gui;
 
 import nl.tue.algo.noisygraphpatterns.data.graph.Graph;
@@ -18,10 +14,6 @@ import nl.tue.geometrycore.geometryrendering.styling.TextAnchor;
 
 import java.awt.*;
 
-/**
- *
- * @author wmeulema
- */
 public class MatrixRendering {
 
     final double scale;
@@ -147,7 +139,6 @@ public class MatrixRendering {
                 shape.translate(dx, 0);
                 draw.draw(shape);
             } else if (layoutAbsent) {
-//        double left = n - 0.1 * graph.vertexCount(), right = n + 0.1 * graph.vertexCount(), bottom = -0.05 * graph.vertexCount(), top = -0.01 * graph.vertexCount();
                 double left = 0.5, right = graph.vertexCount() - 0.5, bottom = -0.05 * graph.vertexCount(), top = -0.01 * graph.vertexCount();
                 double midLeft, midRight;
                 double inEdges = 0, inNotEdges = 0, possibleEdges = (double) (graph.vertexCount() * graph.vertexCount() - graph.vertexCount()) / 2;

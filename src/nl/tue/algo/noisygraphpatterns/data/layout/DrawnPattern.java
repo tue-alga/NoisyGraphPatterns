@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package nl.tue.algo.noisygraphpatterns.data.layout;
 
 import nl.tue.algo.noisygraphpatterns.data.graph.Pattern;
@@ -17,10 +13,6 @@ import nl.tue.geometrycore.util.DoubleUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author wmeulema
- */
 public class DrawnPattern {
 
     public final Pattern pattern;

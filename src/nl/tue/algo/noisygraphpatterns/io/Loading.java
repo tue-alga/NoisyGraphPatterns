@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package nl.tue.algo.noisygraphpatterns.io;
 
 import java.io.*;
@@ -13,10 +9,6 @@ import nl.tue.geometrycore.geometry.linear.Rectangle;
 import nl.tue.geometrycore.io.ReadItem;
 import nl.tue.geometrycore.io.ipe.IPEReader;
 
-/**
- *
- * @author wmeulema
- */
 public class Loading {
 
     public static Graph generate(int n, int m, int seed) {

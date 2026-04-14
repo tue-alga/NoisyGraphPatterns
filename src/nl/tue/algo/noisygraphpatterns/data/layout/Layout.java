@@ -80,8 +80,6 @@ public class Layout {
                     maxY = dp.center.getY() + dp.radius;
                 }
 
-//                width = Math.max(width, Rectangle.byBoundingBox(dp.shape).getRight());
-//                height = Math.max(height, Rectangle.byBoundingBox(dp.shape).getBottom());
                 width = Math.max(width, dp.center.getX() + dp.radius);
                 height = Math.max(height, dp.center.getY() + dp.radius);
             }

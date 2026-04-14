@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package nl.tue.algo.noisygraphpatterns.gui;
 
 import java.awt.*;
@@ -21,10 +17,6 @@ import nl.tue.geometrycore.geometryrendering.styling.Hashures;
 import nl.tue.geometrycore.geometryrendering.styling.SizeMode;
 import nl.tue.geometrycore.geometryrendering.styling.TextAnchor;
 
-/**
- *
- * @author wmeulema
- */
 public class NodeLinkRendering {
 
     final double scale;
@@ -36,10 +28,7 @@ public class NodeLinkRendering {
     public void render(GeometryRenderer draw, Graph graph, Layout layout, double dx, boolean horizontal) {
         draw.setSizeMode(SizeMode.WORLD);
 
-        double width = dx;
         double dy = 0;
-//        dy += dx - layout.dy() * scale;
-//        dx -= layout.dx() * scale;
 
         draw.setAlpha(0.5);
         for (int c = 0; c < graph.patterns.size(); c++) {
@@ -134,7 +123,6 @@ public class NodeLinkRendering {
 
         if(horizontal) {
             // draw special glyph for vertices not in patterns
-//        double left = n - 0.1 * graph.vertexCount(), right = n + 0.1 * graph.vertexCount(), bottom = -0.05 * graph.vertexCount(), top = -0.01 * graph.vertexCount();
             double left = 0.5, right = graph.vertexCount() - 0.5, bottom = -0.05 * graph.vertexCount(), top = -0.01 * graph.vertexCount();
             double midLeft, midRight;
             double inEdges = 0, inNotEdges = 0, possibleEdges = (double) (graph.vertexCount() * graph.vertexCount() - graph.vertexCount()) / 2;

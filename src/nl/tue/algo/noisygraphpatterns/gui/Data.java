@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package nl.tue.algo.noisygraphpatterns.gui;
 
 import java.io.File;
@@ -20,10 +16,6 @@ import nl.tue.algo.noisygraphpatterns.data.layout.Layout;
 import nl.tue.algo.noisygraphpatterns.io.Loading;
 import nl.tue.geometrycore.gui.GUIUtil;
 
-/**
- *
- * @author wmeulema
- */
 public class Data {
 
     public static void main(String[] args) {
@@ -93,19 +85,14 @@ public class Data {
         draw.repaint();
     }
 
-    void setShowRulers(boolean v) {
-        show_rulers = v;
-        draw.repaint();
-    }
-
     void setShowBiofabric(boolean v) {
         show_biofabric = v;
-        draw.repaint();
+        draw.zoomToFit();
     }
 
     void setShowBioMotifs(boolean v) {
         show_biomotifs = v;
-        draw.repaint();
+        draw.zoomToFit();
     }
 
     void runLayoutAlgorithm() {

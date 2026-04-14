@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package nl.tue.algo.noisygraphpatterns.gui;
 
 import nl.tue.algo.noisygraphpatterns.data.graph.Vertex;
@@ -18,10 +14,6 @@ import nl.tue.geometrycore.io.ipe.IPEWriter;
 import java.io.File;
 import java.io.IOException;
 
-/**
- *
- * @author wmeulema
- */
 public class DrawPanel extends GeometryPanel {
 
     private final Data data;
@@ -88,7 +80,7 @@ public class DrawPanel extends GeometryPanel {
             if (data.show_biofabric) {
                 biofabric.render(this, data.graph, 2 * dx());
                 if (data.show_biomotifs) {
-                    biofabric.renderMotif(this, data.graph, 2 * dx(), dx());
+                    biofabric.renderMotif(this, data.graph, 2 * dx(), scale * data.graph.vertices.length * 1.05 + margin);
                 }
             } else {
                 if (data.show_biomotifs) {
@@ -100,7 +92,7 @@ public class DrawPanel extends GeometryPanel {
         } else if (data.show_biofabric) {
             biofabric.render(this, data.graph, dx());
             if (data.show_biomotifs) {
-                biofabric.renderMotif(this, data.graph, dx(), dx());
+                biofabric.renderMotif(this, data.graph, dx(), scale * data.graph.vertices.length * 1.05 + margin);
             }
         } else if (data.show_biomotifs) {
             biofabric.renderMotif(this, data.graph, dx(), 0);
@@ -136,7 +128,7 @@ public class DrawPanel extends GeometryPanel {
             if (data.show_biofabric) {
                 biofabric.render(ipe, data.graph, 2 * dx());
                 if (data.show_biomotifs) {
-                    biofabric.renderMotif(ipe, data.graph, 2 * dx(), dx());
+                    biofabric.renderMotif(ipe, data.graph, 2 * dx(), scale * data.graph.vertices.length * 1.05 + margin);
                 }
             } else {
                 if (data.show_biomotifs) {
@@ -147,7 +139,7 @@ public class DrawPanel extends GeometryPanel {
         } else if (data.show_biofabric) {
             biofabric.render(ipe, data.graph, dx());
             if (data.show_biomotifs) {
-                biofabric.renderMotif(ipe, data.graph, dx(), dx());
+                biofabric.renderMotif(ipe, data.graph, dx(), scale * data.graph.vertices.length * 1.05 + margin);
             }
         } else if (data.show_biomotifs) {
             biofabric.renderMotif(ipe, data.graph, dx(), 0);
@@ -162,17 +154,24 @@ public class DrawPanel extends GeometryPanel {
 
     @Override
     public Rectangle getBoundingRectangle() {
-        Rectangle R = Rectangle.byCornerAndSize(new Vector(0, -data.graph.vertices.length * 0.05), data.graph.vertices.length * 1.10, data.graph.vertices.length * 1.10);
-        R.scale(scale, scale);
-        R.setWidth(R.width() + 2 * margin);
-        R.setHeight(R.height() + 2 * margin);
+        Rectangle R = Rectangle.byCornerAndSize(new Vector(-scale * data.graph.vertices.length * 0.05, -scale * data.graph.vertices.length * 0.05),
+                                                        dx() + scale * data.graph.vertices.length * 0.05, scale * data.graph.vertices.length * 1.05);
+        R.setRight(R.getRight() + margin);
+        R.setLeft(R.getLeft() - margin);
+        R.setTop(R.getTop() + margin);
+        R.setBottom(R.getBottom() - margin);
         if (data.drawDefault || data.drawRandom) {
-            R.setRight(R.getRight() + scale * data.graph.vertices.length * 1.05 + margin);
+            R.setRight(R.getRight() + scale * dx());
         }
         if (data.layout != null) {
-//            R.setRight(R.getRight() + scale * (data.layout.width() - data.layout.dx()) + margin);
-            R.setRight(R.getRight() + scale * data.graph.vertices.length * 1.10);
-            R.setHeight(Math.max(R.height(), scale * data.layout.height() - data.layout.dy()) + 2 * margin);
+            R.setRight(R.getRight() + dx());
+            R.setTop(Math.max(R.getTop(), scale * data.layout.height() - data.layout.dy()) + 2 * margin);
+        }
+        if(data.show_biofabric || data.show_biomotifs) {
+            R.setRight(R.getRight() + scale * (data.graph.edgeCount() + data.graph.vertices.length * 0.05) + margin);
+            if (data.show_biofabric && data.show_biomotifs) {
+                R.setTop(R.getTop() + scale * data.graph.vertices.length * 1.10 + margin);
+            }
         }
         return R;
     }

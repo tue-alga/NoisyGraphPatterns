@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package nl.tue.algo.noisygraphpatterns.algorithms.layout;
 
 import java.util.ArrayList;
@@ -18,10 +14,6 @@ import nl.tue.geometrycore.geometry.linear.Rectangle;
 import nl.tue.geometrycore.geometry.mix.GeometryCycle;
 import nl.tue.geometrycore.gui.sidepanel.SideTab;
 
-/**
- *
- * @author wmeulema
- */
 public abstract class LayoutAlgorithm {
     
     public Layout run(Graph g) {

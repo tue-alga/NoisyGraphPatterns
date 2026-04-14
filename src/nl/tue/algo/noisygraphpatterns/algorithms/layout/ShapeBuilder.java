@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package nl.tue.algo.noisygraphpatterns.algorithms.layout;
 
 import nl.tue.geometrycore.geometry.Vector;
@@ -9,10 +5,6 @@ import nl.tue.geometrycore.geometry.curved.CircularArc;
 import nl.tue.geometrycore.geometry.linear.LineSegment;
 import nl.tue.geometrycore.geometry.mix.GeometryCycle;
 
-/**
- *
- * @author wmeulema
- */
 public class ShapeBuilder {
 
     private GeometryCycle gc = new GeometryCycle();

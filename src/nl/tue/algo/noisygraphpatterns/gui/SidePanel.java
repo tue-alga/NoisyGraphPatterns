@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package nl.tue.algo.noisygraphpatterns.gui;
 
 import java.util.ArrayList;
@@ -14,10 +10,6 @@ import nl.tue.geometrycore.gui.sidepanel.TabbedSidePanel;
 
 import javax.swing.*;
 
-/**
- *
- * @author wmeulema
- */
 public class SidePanel extends TabbedSidePanel {
 
     private final Data data;
@@ -46,12 +38,12 @@ public class SidePanel extends TabbedSidePanel {
         tab.addCheckbox("Draw Default Matrix", data.drawDefault, (e, v) -> data.setDrawDefault(v));
         tab.addCheckbox("Draw Random Matrix", data.drawDefault, (e, v) -> data.setDrawRandom(v));
         tab.addCheckbox("Show Pattern Precision bar", data.precisionBar, (e, v) -> data.setPrecisionBar(v));
-        tab.addCheckbox("Horizontal bar", data.horizontalBar, (e, v) -> data.setHorizontalBar(v));
+        tab.addCheckbox("Horizontal Bar", data.horizontalBar, (e, v) -> data.setHorizontalBar(v));
 
         tab.addCheckbox("Show BioFabric", data.show_biofabric, (e, v) -> data.setShowBiofabric(v));
         tab.addCheckbox("Show BioFabric Motifs", data.show_biomotifs, (e, v) -> data.setShowBioMotifs(v));
 
-        tab.addCheckbox("Show vertex ordering", data.show_ordering, (e, v) -> data.setShowOrdering(v));
+        tab.addCheckbox("Show Vertex Ordering", data.show_ordering, (e, v) -> data.setShowOrdering(v));
     }
 
     private void addGraphsTab() {

@@ -234,11 +234,7 @@ public class BioFabricRendering {
                             // draw hole to indicate missing edges
                             draw.setStroke(ExtendedColors.white, 2, Dashing.SOLID);
                             draw.setFill(ExtendedColors.white, Hashures.SOLID);
-//                            sideLength = Math.sqrt(p.possibleEdges() - p.edges());
                             rectangle.scale((p.possibleEdges() - p.edges) / p.possibleEdges(), rectangle.center());
-//                            margin = (Math.max(p.right - p.left, p.bottom - p.top) - sideLength);
-//                            rectangle = new Rectangle(scale * (i + margin), scale * (i + p.right - p.left - margin), scale * (n - p.bottom - 0.5 + margin), scale * (n - p.top - 0.5 - margin));
-//                            rectangle.translate(dx, dy);
                             if(p.possibleEdges() - p.edges > 0) {
                                 draw.draw(rectangle);
                             }
@@ -257,7 +253,6 @@ public class BioFabricRendering {
                 draw.setFill(ExtendedColors.gray, Hashures.SOLID);
                 starShape.translate(dx, dy);
                 draw.draw(starShape);
-//                i += starEdges.size();
                 // draw biofabric edges in star motif
                 for (Integer c : starEdges) {
                     top = new Vector(scale * i, scale * (n - r - 0.5));

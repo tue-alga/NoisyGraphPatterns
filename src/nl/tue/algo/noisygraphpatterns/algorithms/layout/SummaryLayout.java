@@ -40,21 +40,6 @@ public class SummaryLayout extends LayoutAlgorithm {
             // create glyph
             dp = layout.get(p);
             if (p.type == Pattern.PatternType.CLIQUE) {
-//                List<DrawnPattern> componentPatterns = new ArrayList<>();
-//                findComponent(layout, p , new boolean[graph.patterns.size()], componentPatterns);
-//
-//                Vector target = new Vector();
-//                Vector centerOfGravity = new Vector();
-//                double minx = Double.POSITIVE_INFINITY, miny = Double.POSITIVE_INFINITY;
-//                for (DrawnPattern dp2 : componentPatterns) {
-//                    if(dp.pattern.left < minx) {
-//                        minx = dp2.pattern.left;
-//                    }
-//                    if (graph.vertexCount() - dp2.pattern.bottom < miny) {
-//                        miny = graph.vertexCount() - dp2.pattern.bottom;
-//                    }
-//                }
-//                target.translate(minx/2 + center.getX()/2, miny/2 + center.getY()/2);
                 dp.initializeCircleGlyph(glyphScaling, center, layout);
             } else { // Pattern.PatternType.BICLIQUE
                 dp.initializeDiamondGlyph(glyphScaling, center, layout);
@@ -73,10 +58,7 @@ public class SummaryLayout extends LayoutAlgorithm {
                         Connector connector = new Connector(p2, shape);
                         // check whether this biclique is part of connector
                         dp = layout.get(p);
-//                    if(!dp.isLeftHyperedge()) {
                         connector.incidentPatterns.add(p);
-//                    }
-                        // set connector
                         dp.connectors.add(connector);
 
                         for (List<Connector> connectorList : connectorLists) {
@@ -92,9 +74,7 @@ public class SummaryLayout extends LayoutAlgorithm {
                         Connector connector = new Connector(p2, shape);
                         // check whether this biclique is part of connector
                         dp = layout.get(p);
-//                    if(!dp.isBottomHyperedge()) {
                         connector.incidentPatterns.add(p);
-//                    }
                         // set connector
                         dp.connectors.add(connector);
 
@@ -161,64 +141,35 @@ public class SummaryLayout extends LayoutAlgorithm {
                     OrientedGeometry boundary = dp.vertexSets.get(j);
                     Vector center = new Vector(dp.center);
 
-                    // hyperedge bicliques have no incidentConnector (since they are on top of the connector)
-//                    if(!dp.isLeftHyperedge()) {
-                        // translate and rotate the incident connector
-                        GeometryCycle connector = dp.incidentConnectors.get(j).shape;
-                        int index = 0;
-                        for (int k = 0; k < connector.vertexCount(); k++) {
-                            Vector vertex = connector.vertex(k);
-                            if (vertex.isApproximately(boundary.getStart())) { // boundary is not translated yet so this works
-                                index = k;
-                            }
+                    // translate and rotate the incident connector
+                    GeometryCycle connector = dp.incidentConnectors.get(j).shape;
+                    int index = 0;
+                    for (int k = 0; k < connector.vertexCount(); k++) {
+                        Vector vertex = connector.vertex(k);
+                        if (vertex.isApproximately(boundary.getStart())) { // boundary is not translated yet so this works
+                            index = k;
                         }
+                    }
 
-                        Vector connectorVertex = connector.vertex(index);
-                        // first translate, then rotate, because rotating around already translated dp.center
+                    Vector connectorVertex = connector.vertex(index);
+                    // first translate, then rotate, because rotating around already translated dp.center
+                    connectorVertex.translate(translations[i]);
+                    connectorVertex.rotate(reverseAngle * angles[i], center);
+                    if(index == connector.vertexCount()-1) {
+                        connectorVertex = connector.vertex(0);
                         connectorVertex.translate(translations[i]);
                         connectorVertex.rotate(reverseAngle * angles[i], center);
-                        if(index == connector.vertexCount()-1) {
-                            connectorVertex = connector.vertex(0);
-                            connectorVertex.translate(translations[i]);
-                            connectorVertex.rotate(reverseAngle * angles[i], center);
-                        } else {
-                            connectorVertex = connector.vertex(index+1);
-                            connectorVertex.translate(translations[i]);
-                            connectorVertex.rotate(reverseAngle * angles[i], center);
-                        }
-//                    }
+                    } else {
+                        connectorVertex = connector.vertex(index+1);
+                        connectorVertex.translate(translations[i]);
+                        connectorVertex.rotate(reverseAngle * angles[i], center);
+                    }
 
                     // translate and rotate boundary last because it is used in the earlier check
                     boundary.translate(translations[i]);
                     boundary.rotate(reverseAngle * angles[i], center);
                 }
             }
-
-            // translate hyperedge bicliques to their centroid
-//            for (int i = 0; i < graph.patterns.size(); i++) {
-//                Pattern p = graph.patterns.get(i);
-//                DrawnPattern dp = layout.get(p);
-//                if (dp.connector != null && dp.isLeftHyperedge()) { // p.type == Pattern.PatternType.BICLIQUE && dp.isHyperedge()
-//                    GeometryCycle shape = dp.connector.shape;
-//                    // find centroid of connector shape
-//                    Vector corner;
-//                    Vector avg = new Vector();
-//                    for (int j = 0; j < shape.vertexCount(); j++) {
-//                        corner = shape.vertex(j);
-//                        avg.translate(corner.getX(), corner.getY());
-//                    }
-//                    avg.scale(1.0/shape.vertexCount());
-//
-//                    // set center of glyph to found centroid
-//                    Vector translation = new Vector(avg);
-//                    translation.translate(-dp.center.getX(), -dp.center.getY());
-//
-//                    dp.translate(translation);
-//                    for(OrientedGeometry boundary : dp.vertexSets) {
-//                        boundary.translate(translation);
-//                    }
-//                }
-//            }
         }
     }
 
@@ -407,8 +358,6 @@ public class SummaryLayout extends LayoutAlgorithm {
             rotation.rotate(Math.PI/4);
             rotation.scale(dp.radius * Math.sqrt(2) / (p.bottom - p.top + 1) * (index - p.top + 0.5 - marginSign * margin));
             rotation.translate(0, dp.radius);
-            // position for round glyphs
-//            rotation.rotate(2*Math.PI/(p.right-p.left+1 + p.bottom-p.top+1) * (index - p.top + marginSign * margin));
         }
         // add this vector to center point to find absolute location of index
         Vector result = new Vector(dp.center);
@@ -549,8 +498,6 @@ public class SummaryLayout extends LayoutAlgorithm {
             rotation.rotate(Math.PI/4);
             rotation.scale(dp.radius * Math.sqrt(2) / (p.right - p.left + 1) * (index - p.left + 0.5 - marginSign * margin));
             rotation.translate(0, -dp.radius);
-            // position for round glyphs
-//            rotation.rotate(2*Math.PI/(p.right-p.left+1 + p.bottom-p.top+1) * (index - p.top + marginSign * margin));
         }
         // add this vector to center point to find absolute location of index
         Vector result = new Vector(dp.center);
@@ -613,11 +560,6 @@ public class SummaryLayout extends LayoutAlgorithm {
                     centroid.translate(shape.vertex(k));
                 }
                 centroid.scale(1.0/shape.vertexCount());
-//                dp2 = layout.get(connector.incidentPatterns.get(0));
-//                if(dp1.pattern.index == dp2.pattern.index) {
-//                    dp2 = layout.get(connector.incidentPatterns.get(1));
-//                }
-//                centroid.translate(dp2.center);
 
                 centroid.translate(-dp1.center.getX(), -dp1.center.getY());
                 centroid.normalize();
@@ -643,42 +585,7 @@ public class SummaryLayout extends LayoutAlgorithm {
                 repulsion.translate(dp1.center.getX() - dp2.center.getX(), dp1.center.getY() - dp2.center.getY());
                 length = repulsion.length();
                 repulsion.normalize();
-//                if (dist(dp1.center, dp2.center) >= 0.2) {
-//                    repulsion.scale((dp1.radius + dp2.radius) / (dist(dp1.center, dp2.center) * dist(dp1.center, dp2.center)));
-//                }
-
-
-                // cliques and bicliques in same connector repulse harder
-//                if (//(p2.bottomAdjacentCliques.contains(p1) || p2.leftAdjacentCliques.contains(p1)) &&
-//                        dist(dp1.center, dp2.center) < (dp1.radius + dp2.radius) + 2 * margin) {
-//                    length = repulsion.length();
-//                    repulsion.normalize();
-//                    repulsion.scale(length + (dp1.radius + dp2.radius) + 2 * margin - dist(dp1.center, dp2.center));
-//                }
-
-//                if (dist(dp1.center, dp2.center) < (dp1.radius + dp2.radius) + margin) {
-//                    length = repulsion.length();
-//                    repulsion.normalize();
-//                    repulsion.scale(length + (dp1.radius + dp2.radius) + margin - dist(dp1.center, dp2.center));
-//                }
-//                else if (dist(dp1.center, dp2.center) > (dp1.radius + dp2.radius) + 2 * margin) {
-//                    repulsion = new Vector();
-//                }
-
-//                if (p1.type == Pattern.PatternType.CLIQUE) {
-//                if ((p2.bottomAdjacentCliques.contains(p1) || p2.leftAdjacentCliques.contains(p1)) ) {
-                    repulsion.scale(glyphRepulsion * Math.pow((dp1.radius + dp2.radius + margin) / (length), 3));
-//                } else {
-//                    repulsion.scale(glyphRepulsion * Math.pow((dp1.radius + dp2.radius) / (length), 3));
-//                }
-
-//                } else { // bicliques repulse weaker
-//                    repulsion.scale(glyphRepulsion / 2);
-//                }
-                //scale up the repulsion over first 1000 iterations
-//                repulsion.scale(Math.min(iteration/2000, 1));
-
-
+                repulsion.scale(glyphRepulsion * Math.pow((dp1.radius + dp2.radius + margin) / (length), 3));
 
                 changes[i].translate(repulsion);
                 repulsion.invert();
@@ -719,16 +626,11 @@ public class SummaryLayout extends LayoutAlgorithm {
                 centerOfGravity.scale(1.0 / componentPatterns.size());
 
                 for (DrawnPattern dp : componentPatterns) {
-//                    target = new Vector(minx, miny);
-//                    translation = new Vector(target.getX()-dp.center.getX(), target.getY() - dp.center.getY());
                     translation = new Vector((1 - gravityAlpha) * (target.getX()-centerOfGravity.getX()) + gravityAlpha * (target.getX()-dp.center.getX()),
                             (1 - gravityAlpha) * (target.getY() - centerOfGravity.getY()) + gravityAlpha * (target.getY()-dp.center.getY()));
-//                    translation = new Vector(target.getX() - centerOfGravity.getX(), target.getY() - centerOfGravity.getY());
 
                     translation.normalize();
                     translation.scale(centerGravity);
-                    //scale up the gravity over first 1000 iterations
-//                    translation.scale(Math.min(iteration/2000, 1));
                     changes[dp.pattern.index].translate(translation);
 
                     if(translation.length() > 50) {
@@ -746,8 +648,7 @@ public class SummaryLayout extends LayoutAlgorithm {
                 } else { // bicliques with connectors have less gravity to connect cliques better
                     translation.scale(centerGravity/5);
                 }
-                //scale up the gravity over first 1000 iterations
-//                translation.scale(Math.min(iteration/2000, 1));
+
                 changes[i].translate(translation);
 
                 if(translation.length() > 50) {
