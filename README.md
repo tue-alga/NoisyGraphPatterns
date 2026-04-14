@@ -14,5 +14,5 @@ The optimal Moran's _I_ matrix orderings are computed by sending an equivalent T
 4. Add a dependency on Apache XML-RPC, easiest done via Maven.
 5. Run _gui.Data_.
 
-[^1]: Wulms J., Meulemans W., Speckmann B.: Noisy Graph Patterns via Ordered Matrices. _Computer Graphics Forum_ 2026. forthcoming.
-[^2]: Wulms J., Meulemans W., Speckmann B.: Unfolding Ordered Matrices into BioFabric Motifs. _Eurographics Digital Library_ forthcoming.
+[^1]: J. Wulms, W. Meulemans, B. Speckmann. Noisy Graph Patterns via Ordered Matrices. _Computer Graphics Forum_, 2026. (Forthcoming)
+[^2]: J. Wulms, W. Meulemans, B. Speckmann. Unfolding Ordered Matrices into BioFabric Motifs. _Proc. 27th Eurographics Conference on Visualization - Short Papers (EuroVis)_, 2026. (Forthcoming)
