@@ -10,6 +10,7 @@ import nl.tue.geometrycore.geometryrendering.styling.Dashing;
 import nl.tue.geometrycore.geometryrendering.styling.ExtendedColors;
 import nl.tue.geometrycore.geometryrendering.styling.Hashures;
 import nl.tue.geometrycore.io.ipe.IPEWriter;
+import nl.tue.geometrycore.util.Pair;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,6 +68,7 @@ public class DrawPanel extends GeometryPanel {
             }
 
             nodelink.render(this, data.graph, data.layout, dx(), data.horizontalBar);
+            Pair<Double, Double> minMax = nodelink.getMinMax(data.graph, data.layout);
 
             if (data.layout.debug != null) {
                 BaseGeometry bg = data.layout.debug.clone();
@@ -78,13 +80,13 @@ public class DrawPanel extends GeometryPanel {
             }
 
             if (data.show_biofabric) {
-                biofabric.render(this, data.graph, 2 * dx());
+                biofabric.render(this, data.graph, dx() + scale * (minMax.getSecond() - minMax.getFirst() + data.graph.vertices.length * 0.10));
                 if (data.show_biomotifs) {
-                    biofabric.renderMotif(this, data.graph, 2 * dx(), scale * data.graph.vertices.length * 1.05 + margin);
+                    biofabric.renderMotif(this, data.graph, dx() + scale * (minMax.getSecond() - minMax.getFirst() + data.graph.vertices.length * 0.10), scale * data.graph.vertices.length * 1.05 + margin);
                 }
             } else {
                 if (data.show_biomotifs) {
-                    biofabric.renderMotif(this, data.graph, 2 * dx(), 0);
+                    biofabric.renderMotif(this, data.graph, dx() + scale * (minMax.getSecond() - minMax.getFirst() + data.graph.vertices.length * 0.10), 0);
                 }
             }
 
@@ -124,15 +126,16 @@ public class DrawPanel extends GeometryPanel {
 
         if (data.layout != null) {
             nodelink.render(ipe, data.graph, data.layout, dx(), data.horizontalBar);
+            Pair<Double, Double> minMax = nodelink.getMinMax(data.graph, data.layout);
 
             if (data.show_biofabric) {
-                biofabric.render(ipe, data.graph, 2 * dx());
+                biofabric.render(ipe, data.graph, dx() + scale * (minMax.getSecond() - minMax.getFirst() + data.graph.vertices.length * 0.10));
                 if (data.show_biomotifs) {
-                    biofabric.renderMotif(ipe, data.graph, 2 * dx(), scale * data.graph.vertices.length * 1.05 + margin);
+                    biofabric.renderMotif(ipe, data.graph, dx() + scale * (minMax.getSecond() - minMax.getFirst() + data.graph.vertices.length * 0.10), scale * data.graph.vertices.length * 1.05 + margin);
                 }
             } else {
                 if (data.show_biomotifs) {
-                    biofabric.renderMotif(ipe, data.graph, 2 * dx(), 0);
+                    biofabric.renderMotif(ipe, data.graph, dx() + scale * (minMax.getSecond() - minMax.getFirst() + data.graph.vertices.length * 0.10), 0);
                 }
             }
 
@@ -160,11 +163,10 @@ public class DrawPanel extends GeometryPanel {
         R.setLeft(R.getLeft() - margin);
         R.setTop(R.getTop() + margin);
         R.setBottom(R.getBottom() - margin);
-        if (data.drawDefault || data.drawRandom) {
-            R.setRight(R.getRight() + scale * dx());
-        }
+
         if (data.layout != null) {
-            R.setRight(R.getRight() + dx());
+            Pair<Double, Double> minMax = nodelink.getMinMax(data.graph, data.layout);
+            R.setRight(R.getRight() + scale * (minMax.getSecond()-minMax.getFirst()));
             R.setTop(Math.max(R.getTop(), scale * data.layout.height() - data.layout.dy()) + 2 * margin);
         }
         if(data.show_biofabric || data.show_biomotifs) {

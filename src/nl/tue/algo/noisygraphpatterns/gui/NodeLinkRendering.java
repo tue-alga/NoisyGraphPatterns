@@ -16,6 +16,7 @@ import nl.tue.geometrycore.geometryrendering.styling.ExtendedColors;
 import nl.tue.geometrycore.geometryrendering.styling.Hashures;
 import nl.tue.geometrycore.geometryrendering.styling.SizeMode;
 import nl.tue.geometrycore.geometryrendering.styling.TextAnchor;
+import nl.tue.geometrycore.util.Pair;
 
 public class NodeLinkRendering {
 
@@ -25,10 +26,33 @@ public class NodeLinkRendering {
         this.scale = scale;
     }
 
+    public Pair<Double,Double> getMinMax(Graph graph, Layout layout) {
+        double minX = Double.MAX_VALUE;
+        double maxX = Double.MIN_VALUE;
+        double shapeMin, shapeMax;
+
+        for (int p = 0; p < graph.patterns.size(); p++) {
+            BaseGeometry shape = layout.get(graph.patterns.get(p)).shape;
+            shapeMin = shape.closestPoint(new Vector(-100000, 0.0)).getX();
+            shapeMax = shape.closestPoint(new Vector(100000, 0.0)).getX();
+            if (shapeMin < minX) {
+                minX = shapeMin;
+            }
+            if (shapeMax > maxX) {
+                maxX = shapeMax;
+            }
+        }
+
+        return new Pair<Double, Double>(minX, maxX);
+    }
+
     public void render(GeometryRenderer draw, Graph graph, Layout layout, double dx, boolean horizontal) {
         draw.setSizeMode(SizeMode.WORLD);
 
         double dy = 0;
+
+        // fix dx by translating with the leftmost X coordinate of the drawn shapes
+        dx = dx - scale * getMinMax(graph, layout).getFirst();
 
         draw.setAlpha(0.5);
         for (int c = 0; c < graph.patterns.size(); c++) {
