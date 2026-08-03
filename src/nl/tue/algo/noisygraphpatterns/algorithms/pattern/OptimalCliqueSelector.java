@@ -16,8 +16,8 @@ public class OptimalCliqueSelector extends PatternSelector {
     public int bicliqueSize = 2;
     public int starSize = 4;
     public double threshold = 0.8;
-    public double localThreshold = 0.1;
-    public double linePercent = 0.9;
+    public double localThreshold = 0.5;
+    public double linePercent = 0.85;
 
     private int maxSize = 10;
     private List<Pattern> candidateBicliques = new ArrayList<>();

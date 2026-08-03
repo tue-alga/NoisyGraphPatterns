@@ -16,8 +16,8 @@ public class SidePanel extends TabbedSidePanel {
     private SideTab layoutTab, patternTab, orderingTab, graphsTab;
     JButton neosButton;
 
-    private NEOSJob neos;
-    private boolean neosUsable = true, neosBusy = false;
+    protected NEOSJob neos;
+    private boolean neosUsable = true;
     private NEOSRunner neosRunner;
 
     public SidePanel(Data data) {
@@ -187,7 +187,7 @@ public class SidePanel extends TabbedSidePanel {
         neosUsable = true;
     }
 
-    private void configureTSPNEOS() {
+    protected void configureTSPNEOS() {
         neos.category = "co";
         neos.solver = "concorde";
         neos.inputMethod = "TSP";
@@ -198,7 +198,7 @@ public class SidePanel extends TabbedSidePanel {
         neos.plType = "no";
     }
 
-    private String graphToNeos() {
+    protected String graphToNeos() {
         int size = data.graph.vertexCount();
 
         StringBuilder output = new StringBuilder();

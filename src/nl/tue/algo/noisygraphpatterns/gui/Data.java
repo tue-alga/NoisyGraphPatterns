@@ -176,6 +176,10 @@ public class Data {
         }
     }
 
+    protected void saveIPE(File f) {
+        draw.writeIPE(f);
+    }
+
     void load(File f) {
         // load new graph and reset layout
         graph = Loading.loadFile(f);
@@ -316,5 +320,10 @@ public class Data {
                 runLayoutAlgorithmIncremental();
             }
         }
+    }
+
+    protected void addOptimalOrdering() {
+        side.configureTSPNEOS();
+        side.neos.submit();
     }
 }
