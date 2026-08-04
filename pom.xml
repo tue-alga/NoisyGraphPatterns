@@ -33,6 +33,18 @@
     <build>
         <sourceDirectory>src</sourceDirectory>
 
+        <resources>
+
+            <resource>
+                <directory>resources</directory>
+            </resource>
+
+            <resource>
+                <directory>../GeometryCore/resources</directory>
+            </resource>
+
+        </resources>
+
         <plugins>
 
             <plugin>
