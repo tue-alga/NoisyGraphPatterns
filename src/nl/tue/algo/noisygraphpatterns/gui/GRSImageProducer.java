@@ -35,7 +35,6 @@ public class GRSImageProducer {
         data.drawDefault = true;
         f = new File("./figures/flt58-s0.5t0.85.ipe");
         try {
-            f.getParentFile().mkdirs();
             f.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
