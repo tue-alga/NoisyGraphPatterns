@@ -1,0 +1,3 @@
+Title: Noisy Graph Patterns via Ordered Matrices
+Authors: Jules Wulms, Wouter Meulemans, and Bettina Speckmann
+Operating System: Ubuntu

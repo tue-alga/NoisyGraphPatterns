@@ -2,6 +2,7 @@ package nl.tue.algo.noisygraphpatterns.gui;
 
 import nl.tue.algo.noisygraphpatterns.io.Loading;
 import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -33,6 +34,12 @@ public class GRSImageProducer {
 
         data.drawDefault = true;
         f = new File("./figures/flt58-s0.5t0.85.ipe");
+        try {
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         data.saveIPE(f);
     }
 }
