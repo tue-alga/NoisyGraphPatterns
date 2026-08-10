@@ -12,9 +12,9 @@ The optimal Moran's _I_ matrix orderings are computed by sending an equivalent T
 2. Open the Noisy Graph Patterns project in your favorite IDE.
 3. Add the GeometryCore project as a dependency.
 4. Add a dependency on Apache XML-RPC, easiest done via Maven.
-5. Run _gui.Data_.
+5. Run ``gui.Data``.
 
-Alternatively, use the provided Maven wrapper
+Alternatively, use the provided Maven wrapper to create a jar-file and run ``gui.Data`` via CLI. 
 ```bash
 git clone https://github.com/tue-alga/GeometryCore.git
 git clone https://github.com/tue-alga/NoisyGraphPatterns.git
@@ -26,6 +26,8 @@ chmod +x mvnw
 
 java -cp "target/noisygraphpatterns-1.0.0.jar" nl.tue.algo.noisygraphpatterns.gui.Data
 ```
+
+To create a sample figure, the ``GRSImageProducer`` class can be used as well. To do so, simply run ``grsi_run.sh``. This script that installs all dependencies, builds a jar-file, runs ``GRSImageProducer.main``, and converts the output to both a pdf (vector image) and png (raster image).
 
 [^1]: J. Wulms, W. Meulemans, B. Speckmann. Noisy Graph Patterns via Ordered Matrices. _Computer Graphics Forum_, 2026. (Forthcoming)
 [^2]: J. Wulms, W. Meulemans, B. Speckmann. Unfolding Ordered Matrices into BioFabric Motifs. _Proc. 27th Eurographics Conference on Visualization - Short Papers (EuroVis)_, 2026. (Forthcoming)
